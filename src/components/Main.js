@@ -6,9 +6,6 @@ import BoardComponent from './BoardComponent';
 import GameEngine from '../engines/GameEngine';
 import SkyLight from 'react-skylight';
 
-let yeomanImage = require('../images/yeoman.png');
-
-
 class AppComponent extends React.Component {
   constructor(props) {
       super(props);
@@ -62,7 +59,7 @@ class AppComponent extends React.Component {
     } else {
       this.showPopup();
     }
-    this.setTimeout(() => {}, 500);
+    setTimeout(() => {}, 500);
   }
 
   resetGame() {

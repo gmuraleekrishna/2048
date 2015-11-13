@@ -2,6 +2,7 @@
 
 import React from 'react';
 import TileComponent from './TileComponent'
+import Row from 'elemental/lib/components/Row.js'
 
 require('styles//Board.scss');
 
@@ -17,13 +18,13 @@ class BoardComponent extends React.Component {
                       }
                     </div>
                   )
-              });
+              })
     return (
-      <div className='board'>
-        {rows}
-      </div>
-    )
-  }
+        <div className='board'>
+          {rows}
+        </div>
+      )
+    }
 }
 
 BoardComponent.displayName = 'Board';
