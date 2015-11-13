@@ -166,5 +166,4 @@ class GameEngine {
     return { board: this.board, score: this.score };
   }
 }
-
 export default GameEngine;

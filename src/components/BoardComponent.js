@@ -1,7 +1,11 @@
 'use strict';
 
 import React from 'react';
+<<<<<<< HEAD
 import TileComponent from './TileComponent'
+=======
+import TileComponent from "./TileComponent"
+>>>>>>> Initial commit
 
 require('styles//Board.scss');
 
@@ -10,6 +14,7 @@ class BoardComponent extends React.Component {
     var rows = this.props.board.map((row, rowIndex) => {
                   return (
                     <div key={rowIndex} className={'row row' + rowIndex}>
+
                       {
                         row.map((value, colIndex) => {
                           return (<TileComponent key={colIndex} rowIndex={rowIndex} colIndex={colIndex} value={value} />);
