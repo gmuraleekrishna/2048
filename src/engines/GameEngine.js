@@ -87,6 +87,7 @@ class GameEngine {
   }
 
   reset() {
+    this.score = 0;
     this.board = [
                   [0, 0, 4, 0],
                   [0, 0, 0, 0],
