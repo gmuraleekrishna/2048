@@ -1,0 +1,14 @@
+.board {
+  background-color: #CDC1B4;
+  border: 8px solid #BBADA0;
+  border-radius: 7px;
+  height: 824px;
+  margin: 0 auto;
+  width: 824px;
+  .row {
+    border-top: 3px solid #BBADA0;
+    border-bottom: 3px solid #BBADA0;
+    height: 200px;
+    width: 100%;
+  }
+}

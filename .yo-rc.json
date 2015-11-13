@@ -1,0 +1,6 @@
+{
+  "generator-react-webpack": {
+    "appName": "2048",
+    "style": "scss"
+  }
+}
