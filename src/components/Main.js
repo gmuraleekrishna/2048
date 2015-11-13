@@ -1,71 +1,116 @@
 require('normalize.css');
-require('styles/App.css');
+require('styles/App.scss');
 
 import React from 'react';
 import BoardComponent from './BoardComponent';
 import GameEngine from '../engines/GameEngine';
+import SkyLight from 'react-skylight';
 
+let yeomanImage = require('../images/yeoman.png');
 
-var game;
 
 class AppComponent extends React.Component {
   constructor(props) {
       super(props);
-
       this.state = {
                       board: [
                               [0, 0, 4, 0],
                               [0, 0, 0, 0],
                               [0, 0, 2, 0],
-                              [0, 0, 0, 0]
-                            ]
+                              [0, 0, 0, 0],
+                            ],
+                      score: 0
                     };
-      game = new GameEngine(this.state.board);
+      this.game = new GameEngine(this.state.board);
+  }
+
+  showPopup() {
+    this.refs.simpleDialog.show();
   }
 
   updateState() {
-    var nextBoard = game.run();
-    this.setState({ board: nextBoard });
+    var gameStatus = this.game.run();
+    this.setState({ board: gameStatus.board, score: gameStatus.score });
   }
 
   handleKeyPress(e) {
     const UP = 38, DOWN=40, LEFT = 37, RIGHT = 39, ESC = 27;
     e.preventDefault();
 
-
-    if(!game.isGameOver()){
+    if(e.which === ESC) {
+      this.game.reset();
+      this.updateState();
+    } else if(!this.game.isGameOver()) {
       switch (e.which) {
         case LEFT:
-                  game.moveLeft();
+                  this.game.moveLeft();
                   this.updateState();
                   break;
         case UP:
-                  game.moveUp();
+                  this.game.moveUp();
                   this.updateState();
                   break;
         case RIGHT:
-                  game.moveRight();
+                  this.game.moveRight();
                   this.updateState();
                   break;
         case DOWN:
-                  game.moveDown();
-                  this.updateState();
-                  break;
-        case ESC:
-                  game.reset();
+                  this.game.moveDown();
                   this.updateState();
                   break;
       }
+    } else {
+      this.showPopup();
     }
   }
 
+  resetGame() {
+    this.game.reset();
+    this.updateState();
+  }
+
   componentDidMount() {
+
     document.body.addEventListener('keydown', this.handleKeyPress.bind(this));
   }
 
+
+
+
   render() {
+
+    var dialogStyles =  {
+                        width: '30%',
+                        height: '100px',
+                        position: 'fixed',
+                        top: '46%',
+                        left: '34%',
+                        marginLeft: '0',
+                        marginTop: '0',
+                        backgroundColor: '#fff',
+                        borderRadius: '10px',
+                        zIndex: 100,
+                        padding: '10px 25px',
+                        boxShadow: '0'
+                      };
+    var closeButtonStyle = {
+                    cursor: 'pointer',
+                    float: 'right',
+                    fontSize: '1.6em',
+                    margin: '-6px -4px'
+                }
     return (
       <div className='index'>
+        <SkyLight ref="simpleDialog" title="Game over!!" closeButtonStyle={closeButtonStyle} dialogStyles={dialogStyles}>
+          No more moves, your score is {this.state.score}
+        </SkyLight>
+        <div className='tab'>
+          <span className='title'> 2048 </span>
+          <span className='reset' onClick={this.resetGame.bind(this)}></span>
+          <span className='score'>
+            Score: {this.state.score}
+          </span>
+        </div>
         <BoardComponent board={this.state.board} />
       </div>
     );

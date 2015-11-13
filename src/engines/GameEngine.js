@@ -3,46 +3,52 @@ import _ from 'lodash';
 class GameEngine {
   constructor(board) {
     this.board = board;
+    this.score = 0;
+    this.isMoved = false;
   }
 
   transpose(m) {
-    for (var i = 0; i < m.length; i++) {
-      for (var j = i; j < m[0].length; j++) {
-        var x = m[i][j];
-        m[i][j] = m[j][i];
-        m[j][i] = x;
-      }
-    }
+     for (var i = 0; i < m.length; i++) {
+         for (var j = i; j < m[0].length; j++) {
+             var x = m[i][j];
+             m[i][j] = m[j][i];
+             m[j][i] = x;
+         }
+     }
      return m;
-   }
+   };
 
    rotate90Left(m) {
      return this.transpose(m).reverse();
-   }
+   };
 
    rotate90Right(m) {
-     return this.transpose(m.reverse());
-   }
+     return this.transpose(m.reverse());;
+   };
 
   moveUp() {
-    this.rotate90Right(this.board);
+    this.isMoved = true;
+    var rotatedBoard = this.rotate90Right(this.board);
     this.moveRight();
-    this.rotate90Left(this.board);
+    this.board = this.rotate90Left(this.board)
   }
 
   moveDown() {
-    this.rotate90Right(this.board);
+    this.isMoved = true;
+    var rotatedBoard = this.rotate90Right(this.board);
     this.moveLeft();
-    this.rotate90Left(this.board)
+    this.board = this.rotate90Left(this.board)
   }
 
   moveRight() {
+    this.isMoved = true;
     this.board = this.board.map((row) => {
       return this.mergeArray(row.reverse()).reverse();
     });
   }
 
   moveLeft() {
+    this.isMoved = true;
     this.board = this.board.map((row) => {
       return this.mergeArray(row);
     });
@@ -55,7 +61,7 @@ class GameEngine {
   }
 
   mergeArray(array) {
-    var i, nonEmptyTiles = [], mergedArray  = [] ;
+    var i, j, nonEmptyTiles = [], mergedArray  = [] ;
 
     nonEmptyTiles = array.filter((value) => { return value != 0 });
 
@@ -64,7 +70,9 @@ class GameEngine {
         mergedArray.push(nonEmptyTiles[i]);
       } else {
         if (nonEmptyTiles[i] === nonEmptyTiles[i+1]) {
-          mergedArray.push(nonEmptyTiles[i] * 2);
+          var total = nonEmptyTiles[i] * 2;
+          mergedArray.push(total);
+          this.score += total;
           i++;
         } else {
           mergedArray.push(nonEmptyTiles[i]);
@@ -83,8 +91,9 @@ class GameEngine {
                   [0, 0, 4, 0],
                   [0, 0, 0, 0],
                   [0, 0, 2, 0],
-                  [0, 0, 0, 0]
+                  [0, 0, 0, 0],
                 ];
+    this.isMoved = false;
   }
 
   emptyCells() {
@@ -132,9 +141,11 @@ class GameEngine {
   anyMove(rowIndex, colIndex) {
     var cellValue = this.board[rowIndex][colIndex];
     var neighbours = this.neighbours(rowIndex, colIndex);
-    return (_.filter(neighbours, (value) => {
+
+    var moves = (_.filter(neighbours, (value) => {
       return value != null && (cellValue === value || value === 0);
-    }).length) > 0;
+    }));
+    return moves.length > 0;
   }
 
   isGameOver() {
@@ -143,17 +154,16 @@ class GameEngine {
                       return this.anyMove(rowIndex, colIndex);
                     });
                   });
-
-    return _.any(moveMap, (move) => { return (move === true); });
+    var flattenedMap = [].concat.apply([], moveMap);
+    var anyMoveLeft = _.some(flattenedMap, (move) => { return move; });
+    return !anyMoveLeft;
   }
 
   run() {
-    if(!this.isGameOver()) {
+    if(!this.isGameOver() && this.isMoved) {
       this.createRandomCell();
-    } else {
-      window.alert('Game over');
     }
-    return this.board
+    return { board: this.board, score: this.score };
   }
 }
 

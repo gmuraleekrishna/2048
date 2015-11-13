@@ -1,0 +1,43 @@
+/* Base Application Styles */
+html, body {
+  background: #222;
+  margin: 0;
+  padding: 0;
+}
+
+.tab {
+  background-color: antiquewhite;
+  border-radius: 8px;
+  font-size: 30px;
+  margin-bottom: 5px;
+  padding: 5px 0px;
+  width: 100%;
+  .title, .score, .reset {
+    border: 1px solid grey;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    display: inline-block;
+    padding: 10px 15px;
+  }
+  .title {
+    margin-left: 60px;
+  }
+  .score, .reset {
+    float: right;
+  }
+  .score {
+    margin-right: 30px;
+  }
+  .reset {
+    margin-right: 60px;
+    position: relative;
+    &:before {
+      content: "\f01e";
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+      color: #000;
+    }
+  }
+}

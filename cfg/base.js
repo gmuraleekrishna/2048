@@ -45,6 +45,10 @@ module.exports = {
         loader: 'style!css'
       },
       {
+        test: /\.jsx$/,
+        loader: 'jsx-loader'
+      },
+      {
         test: /\.sass/,
         loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
       },
