@@ -5,9 +5,9 @@ import React from 'react';
 import BoardComponent from './BoardComponent';
 import GameEngine from '../engines/GameEngine';
 
-let yeomanImage = require('../images/yeoman.png');
 
 var game;
+
 class AppComponent extends React.Component {
   constructor(props) {
       super(props);
@@ -17,7 +17,7 @@ class AppComponent extends React.Component {
                               [0, 0, 4, 0],
                               [0, 0, 0, 0],
                               [0, 0, 2, 0],
-                              [0, 0, 0, 0],
+                              [0, 0, 0, 0]
                             ]
                     };
       game = new GameEngine(this.state.board);
@@ -65,7 +65,7 @@ class AppComponent extends React.Component {
 
   render() {
     return (
-      <div className="index">
+      <div className='index'>
         <BoardComponent board={this.state.board} />
       </div>
     );

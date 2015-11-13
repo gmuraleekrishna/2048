@@ -6,34 +6,34 @@ class GameEngine {
   }
 
   transpose(m) {
-     for (var i = 0; i < m.length; i++) {
-         for (var j = i; j < m[0].length; j++) {
-             var x = m[i][j];
-             m[i][j] = m[j][i];
-             m[j][i] = x;
-         }
-     }
+    for (var i = 0; i < m.length; i++) {
+      for (var j = i; j < m[0].length; j++) {
+        var x = m[i][j];
+        m[i][j] = m[j][i];
+        m[j][i] = x;
+      }
+    }
      return m;
-   };
+   }
 
    rotate90Left(m) {
      return this.transpose(m).reverse();
-   };
+   }
 
    rotate90Right(m) {
-     return this.transpose(m.reverse());;
-   };
+     return this.transpose(m.reverse());
+   }
 
   moveUp() {
-    var rotatedBoard = this.rotate90Right(this.board);
+    this.rotate90Right(this.board);
     this.moveRight();
-    this.board = this.rotate90Left(this.board)
+    this.rotate90Left(this.board);
   }
 
   moveDown() {
-    var rotatedBoard = this.rotate90Right(this.board);
+    this.rotate90Right(this.board);
     this.moveLeft();
-    this.board = this.rotate90Left(this.board)
+    this.rotate90Left(this.board)
   }
 
   moveRight() {
@@ -55,7 +55,7 @@ class GameEngine {
   }
 
   mergeArray(array) {
-    var i, j, nonEmptyTiles = [], mergedArray  = [] ;
+    var i, nonEmptyTiles = [], mergedArray  = [] ;
 
     nonEmptyTiles = array.filter((value) => { return value != 0 });
 
@@ -83,7 +83,7 @@ class GameEngine {
                   [0, 0, 4, 0],
                   [0, 0, 0, 0],
                   [0, 0, 2, 0],
-                  [0, 0, 0, 0],
+                  [0, 0, 0, 0]
                 ];
   }
 
