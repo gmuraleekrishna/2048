@@ -6,11 +6,12 @@ html, body {
 }
 
 .tab {
-  background-color: antiquewhite;
+  background-color: transparent;
   border-radius: 8px;
   font-size: 30px;
   margin-bottom: 5px;
   padding: 5px 0px;
+  position: fixed;
   width: 100%;
   .title, .score, .reset {
     border: 1px solid grey;
@@ -20,16 +21,16 @@ html, body {
     padding: 10px 15px;
   }
   .title {
-    margin-left: 60px;
+    margin-left: 10px;
   }
   .score, .reset {
     float: right;
   }
   .score {
-    margin-right: 30px;
+    margin-right: 10px;
   }
   .reset {
-    margin-right: 60px;
+    margin-right: 10px;
     position: relative;
     &:before {
       content: "\f01e";
