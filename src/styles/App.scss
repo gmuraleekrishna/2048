@@ -21,12 +21,14 @@ html, body {
     padding: 10px 15px;
   }
   .title {
+    color: darkolivegreen;
     margin-left: 10px;
   }
   .score, .reset {
     float: right;
   }
   .score {
+    color: cornflowerblue;
     margin-right: 10px;
   }
   .reset {
@@ -38,7 +40,7 @@ html, body {
       font-style: normal;
       font-weight: normal;
       text-decoration: inherit;
-      color: #000;
+      color: crimson;;
     }
   }
 }
