@@ -119,7 +119,4 @@ class AppComponent extends React.Component {
 
 AppComponent.displayName = 'App';
 
-AppComponent.defaultProps = {
-};
-
 export default AppComponent;
