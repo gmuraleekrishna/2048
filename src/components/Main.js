@@ -6,9 +6,6 @@ import BoardComponent from './BoardComponent';
 import GameEngine from '../engines/GameEngine';
 import SkyLight from 'react-skylight';
 
-let yeomanImage = require('../images/yeoman.png');
-
-
 class AppComponent extends React.Component {
   constructor(props) {
       super(props);
@@ -74,11 +71,7 @@ class AppComponent extends React.Component {
     document.body.addEventListener('keydown', this.handleKeyPress.bind(this));
   }
 
-
-
-
   render() {
-
     var dialogStyles =  {
                         width: '30%',
                         height: '100px',
@@ -111,9 +104,8 @@ class AppComponent extends React.Component {
             Score: {this.state.score}
           </span>
         </div>
-        <BoardComponent board={this.state.board} />
       </div>
-    );
+    )
   }
 }
 
