@@ -62,6 +62,7 @@ class AppComponent extends React.Component {
     } else {
       this.showPopup();
     }
+    this.setTimeout(() => {}, 500);
   }
 
   resetGame() {
@@ -70,15 +71,10 @@ class AppComponent extends React.Component {
   }
 
   componentDidMount() {
-
     document.body.addEventListener('keydown', this.handleKeyPress.bind(this));
   }
 
-
-
-
   render() {
-
     var dialogStyles =  {
                         width: '30%',
                         height: '100px',
