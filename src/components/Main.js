@@ -79,6 +79,8 @@ class AppComponent extends React.Component {
      min_move_y: 20,
      preventDefaultEvents: true
    });
+
+   $('.reset').touchwipe('touchend', this.resetGame.bind(this));
   }
 
   render() {
@@ -109,8 +111,8 @@ class AppComponent extends React.Component {
         </SkyLight>
         <div className='tab'>
           <span className='title'> 2048 </span>
-          <span className="reset ">
-            <span className='glyphicon glyphicon-repeat' onClick={this.resetGame.bind(this)}></span>
+          <span className="reset" onClick={this.resetGame.bind(this)}>
+            <span className='glyphicon glyphicon-repeat'></span>
           </span>
           <span className='score'>
             Score: {this.state.score}
