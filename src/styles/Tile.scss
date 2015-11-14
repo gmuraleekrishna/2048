@@ -22,11 +22,14 @@
     background-color: #eec;
   }
 
-  &.tile8, &.tile16 &.tile32 &.tile64 &.tile128, &.tile256, &.tile512 {
-    .text {
-      font-size: 1em;
-    }
+  &.tile8, &.tile16, &.tile32, &.tile64, &.tile128, &.tile256, &.tile512 {
     color: #ffe;
+  }
+
+  &.tile16, &.tile32, &.tile64 {
+    .text {
+      font-size: 0.7em;
+    }
   }
 
   &.tile8 {
@@ -45,6 +48,12 @@
     background-color: #f53;
   }
 
+  &.tile128, &.tile256, &.tile512, &.tile2048, &.tile1024 {
+    .text {
+      font-size: 0.6em;
+    }
+  }
+
   &.tile128 {
     background-color: #ec7;
   }
@@ -54,21 +63,16 @@
   }
 
   &.tile512 {
+
     background-color: #ec5;
   }
 
   &.tile1024 {
-    .text {
-      font-size: 0.6em;
-    }
     color: #fff;
     background-color: #ec3;
   }
 
   &.tile2048 {
-    .text {
-      font-size: 0.6em;
-    }
     color: #fff;
     background-color: #ec2;
   }
