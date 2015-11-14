@@ -23,6 +23,9 @@
   }
 
   &.tile8, &.tile16 &.tile32 &.tile64 &.tile128, &.tile256, &.tile512 {
+    .text {
+      font-size: 1em;
+    }
     color: #ffe;
   }
 
@@ -55,11 +58,17 @@
   }
 
   &.tile1024 {
+    .text {
+      font-size: 0.6em;
+    }
     color: #fff;
     background-color: #ec3;
   }
 
   &.tile2048 {
+    .text {
+      font-size: 0.6em;
+    }
     color: #fff;
     background-color: #ec2;
   }
@@ -68,6 +77,5 @@
     display: table-cell;
     position: relative;
     vertical-align: middle;
-    font-size: 2em;
   }
 }
