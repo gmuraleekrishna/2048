@@ -40,6 +40,7 @@ html, body {
   .reset {
     margin-right: 10px;
     position: relative;
+    display: inline-block;
     height: 64px;
     &:before {
       vertical-align: middle;
