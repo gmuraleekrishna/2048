@@ -41,6 +41,7 @@ html, body {
     margin-right: 10px;
     position: relative;
     &:before {
+      font-size: 1em;
       content: "\f01e";
       font-family: FontAwesome;
       font-style: normal;
