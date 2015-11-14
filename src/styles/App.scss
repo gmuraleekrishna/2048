@@ -40,15 +40,14 @@ html, body {
   .reset {
     margin-right: 10px;
     position: relative;
-    padding: 10px 20px
     &:before {
-      font-size: 1em;
+      padding: 10px 20px;
       content: "\f01e";
       font-family: FontAwesome;
       font-style: normal;
       font-weight: normal;
       text-decoration: inherit;
-      color: crimson;
+      color: crimson;;
     }
   }
 }
