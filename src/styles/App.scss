@@ -5,6 +5,12 @@ html, body {
   padding: 0;
 }
 
+@media (min-width: 506px) {
+  html, body {
+    font-size: 30px;
+  }
+}
+
 .tab {
   background-color: transparent;
   border-radius: 8px;
