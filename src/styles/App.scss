@@ -8,10 +8,11 @@ html, body {
 .tab {
   background-color: transparent;
   border-radius: 8px;
-  font-size: 30px;
+  font-size: 1em;
   margin-bottom: 5px;
   padding: 5px 0px;
   width: 100%;
+  min-width: 353px;
   .title, .score, .reset {
     border: 1px solid grey;
     border-radius: 10px;
