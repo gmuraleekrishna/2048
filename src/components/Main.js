@@ -30,9 +30,8 @@ class AppComponent extends React.Component {
     this.setState({ board: gameStatus.board, score: gameStatus.score });
   }
 
-  handleKeyPress(e) {
+  handleEvent(e) {
     const UP = 38, DOWN=40, LEFT = 37, RIGHT = 39, ESC = 27;
-    e.preventDefault();
 
     if(e.which === ESC) {
       this.game.reset();
@@ -68,7 +67,18 @@ class AppComponent extends React.Component {
   }
 
   componentDidMount() {
-    document.body.addEventListener('keydown', this.handleKeyPress.bind(this));
+    const UP = 38, DOWN=40, LEFT = 37, RIGHT = 39, ESC = 27;
+
+    document.body.addEventListener('keydown', this.handleEvent.bind(this));
+    $("body").touchwipe({
+     wipeLeft: () => { this.handleEvent({which: LEFT}); },
+     wipeRight: () => { this.handleEvent({which: RIGHT}); },
+     wipeUp: () => { this.handleEvent({which: DOWN}); },
+     wipeDown: () => { this.handleEvent({which: UP}); },
+     min_move_x: 20,
+     min_move_y: 20,
+     preventDefaultEvents: true
+   });
   }
 
   render() {

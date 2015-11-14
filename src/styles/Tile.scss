@@ -3,10 +3,8 @@
   border-left: 3px solid #BBADA0;
   border-right: 3px solid #BBADA0;
   display: inline-block;
-  padding-left: 0;
   text-align: center;
-  height: 200px;
-  width: 200px;
+  height: 100%;
   border-radius: 3px;
   text-align: center;
   font-weight: bold;
@@ -69,6 +67,5 @@
 
   .text {
     position: relative;
-    top: 30%;
   }
 }

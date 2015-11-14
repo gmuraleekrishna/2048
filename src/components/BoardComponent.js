@@ -20,7 +20,7 @@ class BoardComponent extends React.Component {
                   )
               })
     return (
-        <div className='board'>
+        <div className='container-fluid board'>
           {rows}
         </div>
       )
