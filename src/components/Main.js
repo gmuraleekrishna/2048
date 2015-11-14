@@ -109,7 +109,7 @@ class AppComponent extends React.Component {
         {GameOver}
         <div className=''>
           <div className='tab'>
-            <span className='title left'> 2048 </span>
+            <span className='title text left'> 2048 </span>
             <OverlayTrigger placement="bottom" overlay={tooltip}>
                 <span className='info left action'>
                   <a href="#" target='_blank'>
@@ -117,11 +117,11 @@ class AppComponent extends React.Component {
                   </a>
                 </span>
             </OverlayTrigger>
-            <span className='score right'>
+            <span className='score text right'>
               Score: {this.state.score} Max: {this.state.maxScore}
             </span>
-            <span className="reset right" onClick={this.resetGame.bind(this)}>
-              <Glyphicon glyph="refresh action" />
+            <span className="reset action right" onClick={this.resetGame.bind(this)}>
+              <Glyphicon glyph="refresh" />
             </span>
           </div>
         </div>
