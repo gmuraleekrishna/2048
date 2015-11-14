@@ -1,10 +1,15 @@
 require('normalize.css');
-require('styles/App.scss');
+require('styles//App.scss');
 
 import React from 'react';
 import BoardComponent from './BoardComponent';
 import GameEngine from '../engines/GameEngine';
 import SkyLight from 'react-skylight';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
+import Tooltip from 'react-bootstrap/lib/Tooltip'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
+import Modal from 'react-bootstrap/lib/Modal'
+import Button from 'react-bootstrap/lib/Button'
 
 class AppComponent extends React.Component {
   constructor(props) {
@@ -16,18 +21,19 @@ class AppComponent extends React.Component {
                               [0, 0, 2, 0],
                               [0, 0, 0, 0],
                             ],
-                      score: 0
+                      score: 0,
+                      maxScore: window.localStorage.getItem('maxScore') || 0
                     };
       this.game = new GameEngine(this.state.board);
-  }
-
-  showPopup() {
-    this.refs.simpleDialog.show();
   }
 
   updateState() {
     var gameStatus = this.game.run();
     this.setState({ board: gameStatus.board, score: gameStatus.score });
+    if(gameStatus.score >= this.state.maxScore) {
+      this.setState({maxScore: gameStatus.score})
+      window.localStorage.setItem('maxScore', gameStatus.score);
+    }
   }
 
   handleEvent(e) {
@@ -55,8 +61,6 @@ class AppComponent extends React.Component {
                   this.updateState();
                   break;
       }
-    } else {
-      this.showPopup();
     }
     setTimeout(() => {}, 500);
   }
@@ -84,39 +88,42 @@ class AppComponent extends React.Component {
   }
 
   render() {
-    var dialogStyles =  {
-                        width: '30%',
-                        height: '100px',
-                        position: 'fixed',
-                        top: '46%',
-                        left: '34%',
-                        marginLeft: '0',
-                        marginTop: '0',
-                        backgroundColor: '#fff',
-                        borderRadius: '10px',
-                        zIndex: 100,
-                        padding: '10px 25px',
-                        boxShadow: '0'
-                      };
-    var closeButtonStyle = {
-                    cursor: 'pointer',
-                    float: 'right',
-                    fontSize: '1.6em',
-                    margin: '-6px -4px'
-                }
+    const tooltip = (
+                      <Tooltip id='info'>Use arrow keys or swipe screen to play. When two tiles with the same number touch, they merge into one!</Tooltip>
+                    );
+    var  GameOver = (
+                  <Modal dialogClassName="game-over" bsSize="small" show={this.game.isGameOver()} onHide={() => {}}>
+                    <Modal.Header>
+                      <Modal.Title>Ooh, you are done</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      Your Score is {this.state.score}
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button bsStyle='danger' type='reset' onClick={this.resetGame.bind(this)}>Reset</Button>
+                    </Modal.Footer>
+                  </Modal>
+                )
     return (
       <div className='index'>
-        <SkyLight ref="simpleDialog" title="Game over!!" closeButtonStyle={closeButtonStyle} dialogStyles={dialogStyles}>
-          No more moves, your score is {this.state.score}
-        </SkyLight>
-        <div className='tab'>
-          <span className='title'> 2048 </span>
-          <span className="reset" onClick={this.resetGame.bind(this)}>
-            <span className='glyphicon glyphicon-repeat'></span>
-          </span>
-          <span className='score'>
-            Score: {this.state.score}
-          </span>
+        {GameOver}
+        <div className=''>
+          <div className='tab'>
+            <span className='title left'> 2048 </span>
+            <OverlayTrigger placement="bottom" overlay={tooltip}>
+                <span className='info left action'>
+                  <a href="#" target='_blank'>
+                    <Glyphicon glyph="question-sign" />
+                  </a>
+                </span>
+            </OverlayTrigger>
+            <span className='score right'>
+              Score: {this.state.score} Max: {this.state.maxScore}
+            </span>
+            <span className="reset right" onClick={this.resetGame.bind(this)}>
+              <Glyphicon glyph="refresh action" />
+            </span>
+          </div>
         </div>
         <BoardComponent board={this.state.board} />
       </div>

@@ -5,10 +5,14 @@ html, body {
   padding: 0;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 630px) {
   html, body {
     font-size: 30px;
   }
+}
+
+.game-over {
+  margin-top: 25vh;
 }
 
 .tab {
@@ -16,34 +20,49 @@ html, body {
   border-radius: 8px;
   font-size: 1em;
   margin-bottom: 5px;
-  padding: 5px 0px;
+  padding: 5px 10px;
   width: 100%;
-  min-width: 353px;
-  .title, .score, .reset {
+  min-width: 410px;
+  .score, .reset, .info, .max-score {
     border: 1px solid grey;
     border-radius: 10px;
     background-color: whitesmoke;
     display: inline-block;
     padding: 10px 15px;
   }
+
   .title {
-    color: darkolivegreen;
-    margin-left: 10px;
+    color: whitesmoke;
+    border: 1px solid grey;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 10px 15px;
   }
-  .score, .reset {
-    float: right;
+
+  .action {
+    cursor: pointer;
   }
+
   .score {
     color: cornflowerblue;
+  }
+
+  .left {
+    margin-left: 10px;
+  }
+
+  .right {
+    float: right;
     margin-right: 10px;
   }
+
   .reset {
-    margin-right: 10px;
-    position: relative;
-    display: inline-block;
+    color: crimson;;
+  }
+
+  .reset, .info {
     span:before {
       vertical-align: middle;
-      color: crimson;;
     }
   }
 }

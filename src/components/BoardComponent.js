@@ -2,7 +2,8 @@
 
 import React from 'react';
 import TileComponent from './TileComponent'
-import Row from 'elemental/lib/components/Row.js'
+import Grid from 'react-bootstrap/lib/Grid'
+import Row from 'react-bootstrap/lib/Row'
 
 require('styles//Board.scss');
 
@@ -10,19 +11,19 @@ class BoardComponent extends React.Component {
   render() {
     var rows = this.props.board.map((row, rowIndex) => {
                   return (
-                    <div key={rowIndex} className={'row row' + rowIndex}>
+                    <Row key={rowIndex} className={' a-row row' + rowIndex}>
                       {
                         row.map((value, colIndex) => {
                           return (<TileComponent key={colIndex} rowIndex={rowIndex} colIndex={colIndex} value={value} />);
                         })
                       }
-                    </div>
+                    </Row>
                   )
               })
     return (
-        <div className='container-fluid board'>
+        <Grid className='board'>
           {rows}
-        </div>
+        </Grid>
       )
     }
 }
