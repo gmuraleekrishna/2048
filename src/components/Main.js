@@ -109,7 +109,9 @@ class AppComponent extends React.Component {
         </SkyLight>
         <div className='tab'>
           <span className='title'> 2048 </span>
-          <span className='reset glyphicon glyphicon-repeat' onClick={this.resetGame.bind(this)}></span>
+          <span className="reset ">
+            <span className='glyphicon glyphicon-repeat' onClick={this.resetGame.bind(this)}></span>
+          </span>
           <span className='score'>
             Score: {this.state.score}
           </span>

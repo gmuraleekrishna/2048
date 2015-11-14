@@ -41,8 +41,7 @@ html, body {
     margin-right: 10px;
     position: relative;
     display: inline-block;
-    height: 64px;
-    &:before {
+    span:before {
       vertical-align: middle;
       color: crimson;;
     }
