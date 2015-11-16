@@ -2,10 +2,10 @@ require('normalize.css');
 require('styles//App.scss');
 
 import React from 'react';
+import { Modal, Button } from 'react-bootstrap'
+import Hammer from 'react-hammerjs';
 import BoardComponent from './BoardComponent';
 import GameEngine from '../engines/GameEngine';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
-import Tooltip from 'react-bootstrap/lib/Tooltip'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'react-bootstrap/lib/Button'
@@ -82,15 +82,6 @@ class AppComponent extends React.Component {
     const UP = 38, DOWN=40, LEFT = 37, RIGHT = 39, ESC = 27;
 
     document.body.addEventListener('keydown', this.handleEvent.bind(this));
-    $("body").touchwipe({
-     wipeLeft: () => { this.handleEvent({which: LEFT}); },
-     wipeRight: () => { this.handleEvent({which: RIGHT}); },
-     wipeUp: () => { this.handleEvent({which: DOWN}); },
-     wipeDown: () => { this.handleEvent({which: UP}); },
-     min_move_x: 20,
-     min_move_y: 20,
-     preventDefaultEvents: true
-   });
   }
 
   render() {
