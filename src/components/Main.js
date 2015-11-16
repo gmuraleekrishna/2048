@@ -36,32 +36,33 @@ class AppComponent extends React.Component {
   }
 
   handleEvent(e) {
-    const UP = 38, DOWN=40, LEFT = 37, RIGHT = 39, ESC = 27;
+    const ARROW_UP = 38, ARROW_DOWN = 40, ARROW_LEFT = 37, ARROW_RIGHT = 39, ESC = 27,
+    SWIPE_UP = 8, SWIPE_DOWN = 16, SWIPE_LEFT = 2, SWIPE_RIGHT = 4;
 
     if(e.which === ESC) {
       this.game.reset();
       this.updateState();
     } else if(!this.game.isGameOver()) {
-      switch (e.which) {
-        case LEFT:
+      switch (true) {
+        case (e.which === ARROW_LEFT || e.direction === SWIPE_LEFT):
                   if(this.state.allowedMoves.left) {
                     this.game.moveLeft();
                     this.updateState();
                   }
                   break;
-        case UP:
+        case (e.which === ARROW_UP || e.direction === SWIPE_UP):
                   if(this.state.allowedMoves.up) {
                     this.game.moveUp();
                     this.updateState();
                   }
                   break;
-        case RIGHT:
+        case (e.which === ARROW_RIGHT || e.direction === SWIPE_RIGHT):
                   if(this.state.allowedMoves.right) {
                     this.game.moveRight();
                     this.updateState();
                   }
                   break;
-        case DOWN:
+        case (e.which === ARROW_DOWN || e.direction === SWIPE_DOWN):
                   if(this.state.allowedMoves.down) {
                     this.game.moveDown();
                     this.updateState();
@@ -78,8 +79,6 @@ class AppComponent extends React.Component {
   }
 
   componentDidMount() {
-    const UP = 38, DOWN=40, LEFT = 37, RIGHT = 39, ESC = 27;
-
     document.body.addEventListener('keydown', this.handleEvent.bind(this));
   }
 
@@ -93,14 +92,17 @@ class AppComponent extends React.Component {
                       Your Score is {this.state.score}
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button bsStyle='danger' type='reset' onTouchEnd={this.resetGame.bind(this)}>Reset</Button>
+                      <Button bsStyle='danger' type='reset' onClick={this.resetGame.bind(this)} onTouchEnd={this.resetGame.bind(this)}>Reset</Button>
                     </Modal.Footer>
                   </Modal>
                 )
     return (
       <div className='index'>
         {GameOver}
-        <BoardComponent board={this.state.board} />
+        <Header resetGame={this.resetGame.bind(this)} score={this.state.score} maxScore={this.state.maxScore}/>
+        <Hammer vertical={true} onSwipe={this.handleEvent.bind(this)}>
+          <BoardComponent board={this.state.board} />
+        </Hammer>
       </div>
     );
   }

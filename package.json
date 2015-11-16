@@ -51,7 +51,7 @@
     "null-loader": "^0.1.1",
     "open": "0.0.5",
     "phantomjs": "^1.9.18",
-    "react-hammer": "0.0.3",
+    "react-hammerjs": "^0.4.2",
     "react-hot-loader": "^1.2.9",
     "rimraf": "^2.4.3",
     "style-loader": "^0.13.0",
