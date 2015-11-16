@@ -22,14 +22,15 @@ class AppComponent extends React.Component {
                               [0, 0, 0, 0],
                             ],
                       score: 0,
-                      maxScore: window.localStorage.getItem('maxScore') || 0
+                      maxScore: window.localStorage.getItem('maxScore') || 0,
+                      allowedMoves: { left: true, up: true, down: true, right: true }
                     };
       this.game = new GameEngine(this.state.board);
   }
 
   updateState() {
     var gameStatus = this.game.run();
-    this.setState({ board: gameStatus.board, score: gameStatus.score });
+    this.setState({ board: gameStatus.board, score: gameStatus.score, allowedMoves: gameStatus.allowedMoves });
     if(gameStatus.score >= this.state.maxScore) {
       this.setState({maxScore: gameStatus.score})
       window.localStorage.setItem('maxScore', gameStatus.score);
@@ -45,20 +46,28 @@ class AppComponent extends React.Component {
     } else if(!this.game.isGameOver()) {
       switch (e.which) {
         case LEFT:
-                  this.game.moveLeft();
-                  this.updateState();
+                  if(this.state.allowedMoves.left) {
+                    this.game.moveLeft();
+                    this.updateState();
+                  }
                   break;
         case UP:
-                  this.game.moveUp();
-                  this.updateState();
+                  if(this.state.allowedMoves.up) {
+                    this.game.moveUp();
+                    this.updateState();
+                  }
                   break;
         case RIGHT:
-                  this.game.moveRight();
-                  this.updateState();
+                  if(this.state.allowedMoves.right) {
+                    this.game.moveRight();
+                    this.updateState();
+                  }
                   break;
         case DOWN:
-                  this.game.moveDown();
-                  this.updateState();
+                  if(this.state.allowedMoves.down) {
+                    this.game.moveDown();
+                    this.updateState();
+                  }
                   break;
       }
     }
@@ -112,9 +121,7 @@ class AppComponent extends React.Component {
             <span className='title text left'> 2048 </span>
             <OverlayTrigger placement="bottom" overlay={tooltip}>
                 <span className='info left action'>
-                  <a href="#" target='_blank'>
-                    <Glyphicon glyph="question-sign" />
-                  </a>
+                  <Glyphicon glyph="question-sign" />
                 </span>
             </OverlayTrigger>
             <span className='score text right'>

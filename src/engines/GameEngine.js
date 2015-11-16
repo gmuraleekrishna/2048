@@ -5,6 +5,7 @@ class GameEngine {
     this.board = board;
     this.score = 0;
     this.isMoved = false;
+    this.allowedMoves = { left: false, up: false, down: false, right: false };
   }
 
   transpose(m) {
@@ -136,13 +137,18 @@ class GameEngine {
     var topCenter = this.findCell(rowIndex - 1, colIndex);
     var bottomCenter = this.findCell(rowIndex + 1, colIndex);
 
-    return [leftCenter, topCenter, rightCenter, bottomCenter]
+    return [leftCenter, topCenter, bottomCenter, rightCenter]
   }
 
   anyMove(rowIndex, colIndex) {
     var cellValue = this.board[rowIndex][colIndex];
     var neighbours = this.neighbours(rowIndex, colIndex);
-
+    var allowedMovesIndex = {0: 'left', 1: 'up', 2: 'down', 3: 'right' }
+    neighbours.forEach((neighbour, index) => {
+      if((neighbour === 0 || neighbour === cellValue) && neighbour != null && cellValue != 0) {
+        this.allowedMoves[allowedMovesIndex[index]] = true;
+      }
+    });
     var moves = (_.filter(neighbours, (value) => {
       return value != null && (cellValue === value || value === 0);
     }));
@@ -161,10 +167,11 @@ class GameEngine {
   }
 
   run() {
+    this.allowedMoves = { left: false, up: false, down: false, right: false };
     if(!this.isGameOver() && this.isMoved) {
       this.createRandomCell();
     }
-    return { board: this.board, score: this.score };
+    return { board: this.board, score: this.score, allowedMoves: this.allowedMoves };
   }
 }
 export default GameEngine;
