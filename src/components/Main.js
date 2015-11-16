@@ -92,8 +92,6 @@ class AppComponent extends React.Component {
      min_move_y: 20,
      preventDefaultEvents: true
    });
-
-   $('.reset').touchwipe('touchend', this.resetGame.bind(this));
   }
 
   render() {
@@ -109,7 +107,7 @@ class AppComponent extends React.Component {
                       Your Score is {this.state.score}
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button bsStyle='danger' type='reset' onClick={this.resetGame.bind(this)}>Reset</Button>
+                      <Button bsStyle='danger' type='reset' onTouchEnd={this.resetGame.bind(this)}>Reset</Button>
                     </Modal.Footer>
                   </Modal>
                 )
