@@ -4,7 +4,6 @@ require('styles//App.scss');
 import React from 'react';
 import BoardComponent from './BoardComponent';
 import GameEngine from '../engines/GameEngine';
-import SkyLight from 'react-skylight';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger'
 import Tooltip from 'react-bootstrap/lib/Tooltip'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
