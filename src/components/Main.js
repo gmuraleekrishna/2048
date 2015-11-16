@@ -6,9 +6,8 @@ import { Modal, Button } from 'react-bootstrap'
 import Hammer from 'react-hammerjs';
 import BoardComponent from './BoardComponent';
 import GameEngine from '../engines/GameEngine';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon'
-import Modal from 'react-bootstrap/lib/Modal'
-import Button from 'react-bootstrap/lib/Button'
+import Header from './HeaderComponent'
+
 
 class AppComponent extends React.Component {
   constructor(props) {
@@ -85,9 +84,6 @@ class AppComponent extends React.Component {
   }
 
   render() {
-    const tooltip = (
-                      <Tooltip id='info'>Use arrow keys or swipe screen to play. When two tiles with the same number touch, they merge into one!</Tooltip>
-                    );
     var  GameOver = (
                   <Modal dialogClassName="game-over" bsSize="small" show={this.game.isGameOver()} onHide={() => {}}>
                     <Modal.Header>
@@ -104,22 +100,6 @@ class AppComponent extends React.Component {
     return (
       <div className='index'>
         {GameOver}
-        <div className=''>
-          <div className='tab'>
-            <span className='title text left'> 2048 </span>
-            <OverlayTrigger placement="bottom" overlay={tooltip}>
-                <span className='info left action'>
-                  <Glyphicon glyph="question-sign" />
-                </span>
-            </OverlayTrigger>
-            <span className='score text right'>
-              Score: {this.state.score} Max: {this.state.maxScore}
-            </span>
-            <span className="reset action right" onClick={this.resetGame.bind(this)}>
-              <Glyphicon glyph="refresh" />
-            </span>
-          </div>
-        </div>
         <BoardComponent board={this.state.board} />
       </div>
     );
